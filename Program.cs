@@ -1,14 +1,45 @@
 ﻿var welcomeMesssage = "Starting Program";
 Console.WriteLine(welcomeMesssage);
 
-var anonA = new Person("Jane", 32);
-var anonADescription = anonA.Describe();
-Console.WriteLine(anonADescription);
+var dial = new Dial(100);
 
-var anonB = new Person("Jack", 45);
-var anonBDescription = anonB.Describe();
-Console.WriteLine(anonBDescription);
+// Read all commands from file
+var instructions = new[]
+{
+  "L68",
+  "L30",
+  "R48",
+  "L5",
+  "R60",
+  "L55",
+  "L1",
+  "L99",
+  "R14",
+  "L82",
+};
 
-var anonC = new Person("J", 20);
-var anonCDescription = anonC.Describe();
-Console.WriteLine(anonCDescription);
+
+foreach (var instruction in instructions)
+{
+  // Console.WriteLine(instruction);
+  var direction = instruction.First();
+  // Console.WriteLine(direction);
+  int.TryParse(instruction.Substring(1), out int steps);
+  // Console.WriteLine(steps);
+
+  if (direction == 'L')
+  {
+    dial.TurnLeftBy(steps);
+  }
+  else if (direction == 'R')
+  {
+    dial.TurnRightBy(steps);
+  }
+  else
+  {
+    throw new Exception("Oh! Something went wrong");
+  }
+}
+
+Console.WriteLine(dial.CurrentPosition);
+Console.WriteLine(dial.TotalNull);
